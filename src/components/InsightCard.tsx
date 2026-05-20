@@ -1,124 +1,137 @@
+import React from 'react';
+
 import {
   Pressable,
-  StyleSheet,
   Text,
   View,
 } from 'react-native';
 
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+import Swipeable from
+  'react-native-gesture-handler/Swipeable';
 
-import { Insight } from '../types/insight';
-import { formatDistanceToNow } from 'date-fns';
+import {
+  PRIORITY_COLORS,
+} from '../constants/priorityColors';
+
+import {
+  formatRelativeTime,
+} from '../utils/date';
+
 import {
   getNextStage,
   getPreviousStage,
 } from '../utils/stage';
+
 import styles from '../styles/InsightCard.styles';
-type Props = {
-  insight: Insight;
+import { InsightCardProps } from '../types/InsightCard';
 
-  onMoveStage: (
-    insightId: string,
-    newStage: string
-  ) => void;
-
-  onPress: () => void;
-  onLongPress: () => void;
-};
-
-const priorityColors: Record<
-  'P1' | 'P2' | 'P3' | 'P4',
-  string
-> = {
-  P1: '#EF4444',
-  P2: '#F97316',
-  P3: '#EAB308',
-  P4: '#94A3B8',
-};
 
 export default function InsightCard({
   insight,
   onMoveStage,
   onPress,
   onLongPress,
-}: Props) {
-  const nextStage = getNextStage(
-    insight.stage
-  );
+}: InsightCardProps) {
 
-  const previousStage = getPreviousStage(
-    insight.stage
-  );
-  const safeDate =
-    insight.createdAt
-      ? new Date(
-        insight.createdAt
-      )
-      : null;
+  const nextStage =
+    getNextStage(
+      insight.stage
+    );
+
+  const previousStage =
+    getPreviousStage(
+      insight.stage
+    );
 
   const relativeTime =
-    safeDate &&
-      !isNaN(
-        safeDate.getTime()
-      )
-      ? formatDistanceToNow(
-        safeDate,
-        {
-          addSuffix: true,
-        }
-      )
-      : 'Unknown';
+    formatRelativeTime(
+      insight.createdAt
+    );
+
   return (
+
     <Swipeable
       friction={2}
       overshootLeft={false}
       overshootRight={false}
-      
+
       renderRightActions={() =>
         nextStage ? (
-          <View style={styles.rightAction}>
-            <Text style={styles.actionText}>
+          <View
+            style={
+              styles.rightAction
+            }
+          >
+            <Text
+              style={
+                styles.actionText
+              }
+            >
               Move → {nextStage}
             </Text>
           </View>
         ) : null
       }
+
       renderLeftActions={() =>
         previousStage ? (
-          <View style={styles.leftAction}>
-            <Text style={styles.actionText}>
+          <View
+            style={
+              styles.leftAction
+            }
+          >
+            <Text
+              style={
+                styles.actionText
+              }
+            >
               ← {previousStage}
             </Text>
           </View>
         ) : null
       }
-      onSwipeableOpen={(direction) => {
+
+      onSwipeableOpen={(
+        direction
+      ) => {
+
         if (
-          direction === 'right' &&
+          direction ===
+            'right' &&
           nextStage
         ) {
+
           onMoveStage(
             insight.id,
             nextStage
           );
+
         }
 
         if (
-          direction === 'left' &&
+          direction ===
+            'left' &&
           previousStage
         ) {
+
           onMoveStage(
             insight.id,
             previousStage
           );
+
         }
+
       }}
     >
+
       <Pressable
         style={styles.card}
         onPress={onPress}
-        onLongPress={onLongPress}
+        onLongPress={
+          onLongPress
+        }
       >
+
         <Text
           numberOfLines={2}
           style={styles.title}
@@ -131,24 +144,34 @@ export default function InsightCard({
             'Unknown HCP'}
         </Text>
 
-        <Text style={styles.timestamp}>
+        <Text
+          style={
+            styles.timestamp
+          }
+        >
           {relativeTime}
         </Text>
 
-        <View style={styles.bottomRow}>
-          {/* Priority */}
+        <View
+          style={
+            styles.bottomRow
+          }
+        >
 
           <View
             style={[
               styles.priority,
+
               {
                 backgroundColor:
-                  priorityColors[
-                  insight.priority
+                  PRIORITY_COLORS[
+                    insight
+                      .priority
                   ],
               },
             ]}
           >
+
             <Text
               style={
                 styles.priorityText
@@ -156,37 +179,47 @@ export default function InsightCard({
             >
               {insight.priority}
             </Text>
+
           </View>
 
-          {/* Category */}
-
           {insight.category && (
+
             <View
               style={[
                 styles.category,
+
                 {
                   backgroundColor:
-                    insight.category
+                    insight
+                      .category
                       .color ??
                     '#64748B',
                 },
               ]}
             >
+
               <Text
                 style={
                   styles.categoryText
                 }
               >
                 {
-                  insight.category
+                  insight
+                    .category
                     .name
                 }
               </Text>
-            </View>
-          )}
-        </View>
-      </Pressable>
-    </Swipeable>
-  );
-}
 
+            </View>
+
+          )}
+
+        </View>
+
+      </Pressable>
+
+    </Swipeable>
+
+  );
+
+}

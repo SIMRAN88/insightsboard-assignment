@@ -1,28 +1,37 @@
-import { Card, Text } from 'react-native-paper';
+import React from 'react';
 
-type Props = {
-  title: string;
-  value: string | number;
-};
+import {
+  Card,
+  Text,
+} from 'react-native-paper';
+
+import { styles } from '../../styles/components/analytics/KPICard.styles';
+import { KPICardProps } from '../../types/components/analytics/KPICard';
 
 export default function KPICard({
   title,
   value,
-}: Props) {
+}: KPICardProps) {
+
   return (
-    <Card style={{ flex: 1 }}>
+    <Card style={styles.card}>
+
       <Card.Content>
+
         <Text variant="labelMedium">
           {title}
         </Text>
 
         <Text
           variant="headlineMedium"
-          style={{ marginTop: 8 }}
+          style={styles.value}
         >
           {value}
         </Text>
+
       </Card.Content>
+
     </Card>
   );
+
 }

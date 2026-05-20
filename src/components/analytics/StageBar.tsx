@@ -1,53 +1,88 @@
-import { View, Text } from 'react-native';
-import { STAGE_COLORS } from '../../utils/analytics';
+import React from 'react';
+
+import {
+  Text,
+  View,
+} from 'react-native';
+
+import {
+  STAGE_COLORS,
+} from '../../utils/analytics';
+
+import {
+  formatStageLabel,
+} from '../../utils/formatStageLabel';
+import {
+  styles,
+} from '../../styles/components/analytics/StageBar.styles';
+import {
+  StageBarProps,
+} from '../../types/components/analytics/StageBar';
 
 export default function StageBar({
-    counts,
-}: {
-    counts: Record<string, number>;
-}) {
-    const total =
-        Object.values(counts).reduce(
-            (a, b) => a + b,
-            0,
-        ) || 1;
+  counts,
+}: StageBarProps) {
 
-    return (
-        <View>
+  const total =
+    Object.values(counts)
+      .reduce(
+        (sum, value) =>
+          sum + value,
+        0
+      ) || 1;
+
+  return (
+
+    <View style={styles.container}>
+
+      <View style={styles.bar}>
+
+        {Object.entries(
+          counts
+        ).map(
+          ([stage, count]) => (
 
             <View
-                style={{
-                    flexDirection: 'row',
-                    height: 12,
-                    borderRadius: 999,
-                    overflow: 'hidden',
-                    marginBottom: 12,
-                }}
-            >
-                {Object.entries(counts).map(
-                    ([stage, count]) => (
-                        <View
-                            key={stage}
-                            style={{
-                                flex: count / total,
-                                backgroundColor:
-                                    STAGE_COLORS[
-                                    stage as keyof typeof STAGE_COLORS
-                                    ],
-                            }}
-                        />
-                    ),
-                )}
-            </View>
+              key={stage}
+              style={{
+                flex:
+                  count / total,
 
-            {Object.entries(counts).map(
-                ([stage, count]) => (
-                    <Text key={stage}>
-                        {stage.charAt(0).toUpperCase() +
-                            stage.slice(1)}: {count}
-                    </Text>
-                ),
-            )}
-        </View>
-    );
+                backgroundColor:
+                  STAGE_COLORS[
+                    stage as keyof typeof STAGE_COLORS
+                  ],
+              }}
+            />
+
+          )
+        )}
+
+      </View>
+
+      {Object.entries(
+        counts
+      ).map(
+        ([stage, count]) => (
+
+          <Text
+            key={stage}
+            style={
+              styles.label
+            }
+          >
+            {
+              formatStageLabel(
+                stage
+              )
+            }: {count}
+          </Text>
+
+        )
+      )}
+
+    </View>
+
+  );
+
 }

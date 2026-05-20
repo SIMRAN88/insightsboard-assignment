@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const InsightDetailModalStyles  = StyleSheet.create({
+const InsightDetailModalStyles = StyleSheet.create({
   overlay: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -10,6 +10,15 @@ const InsightDetailModalStyles  = StyleSheet.create({
 
   backdrop: {
     flex: 1,
+  },
+
+  flashContainer: {
+    borderRadius: 10,
+    padding: 6,
+  },
+
+  flashHighlight: {
+    backgroundColor: '#FEF08A',
   },
 
   sheet: {
@@ -74,91 +83,94 @@ const InsightDetailModalStyles  = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700',
   },
-  label:{
-  marginTop:20,
-  marginBottom:10,
-  fontWeight:'700',
-},
+  label: {
+    marginTop: 20,
+    marginBottom: 10,
+    fontWeight: '700',
+  },
 
-optionRow:{
-  flexDirection:'row',
-  flexWrap:'wrap',
-  gap:8,
-},
+  optionRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
 
-optionChip:{
-  paddingHorizontal:14,
-  paddingVertical:10,
-  borderRadius:999,
-  backgroundColor:'#E2E8F0',
-},
+  optionChip: {
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 999,
+    backgroundColor: '#E2E8F0',
+  },
 
-selectedChip:{
-  backgroundColor:'#3F51B5',
-},
-activityRow: {
-  flexDirection: 'row',
+  selectedChip: {
+    backgroundColor: '#3F51B5',
+  },
+  activityRow: {
+    flexDirection: 'row',
 
-  marginTop: 16,
+    marginTop: 16,
 
-  paddingBottom: 16,
+    paddingBottom: 16,
 
-  borderBottomWidth: 1,
+    borderBottomWidth: 1,
 
-  borderBottomColor:
-    '#E5E7EB',
-},
+    borderBottomColor:
+      '#E5E7EB',
+  },
 
-timelineDot: {
-  width: 10,
+  timelineDot: {
+    width: 10,
 
-  height: 10,
+    height: 10,
 
-  borderRadius: 999,
+    borderRadius: 999,
 
-  backgroundColor:
-    '#4F46E5',
+    backgroundColor:
+      '#4F46E5',
 
-  marginTop: 6,
+    marginTop: 6,
 
-  marginRight: 12,
-},
+    marginRight: 12,
+  },
 
-activityContent: {
-  flex: 1,
-},
+  activityContent: {
+    flex: 1,
+  },
 
-activityField: {
-  fontSize: 14,
+  activityField: {
+    fontSize: 14,
 
-  fontWeight: '700',
+    fontWeight: '700',
 
-  color: '#111827',
+    color: '#111827',
 
-  marginBottom: 4,
-},
+    marginBottom: 4,
+  },
 
-activityChange: {
-  fontSize: 14,
+  activityChange: {
+    fontSize: 14,
 
-  color: '#475569',
+    color: '#475569',
 
-  lineHeight: 22,
-},
+    lineHeight: 22,
+  },
 
-activityArrow: {
-  color: '#4F46E5',
+  activityArrow: {
+    color: '#4F46E5',
 
-  fontWeight: '700',
-},
+    fontWeight: '700',
+  },
 
-activityTime: {
-  marginTop: 8,
+  activityTime: {
+    marginTop: 8,
 
-  fontSize: 12,
+    fontSize: 12,
 
-  color: '#9CA3AF',
-},
+    color: '#9CA3AF',
+  },
+  emptyActivity: {
+    color: '#64748B',
+  },
 });
 
 export default InsightDetailModalStyles;

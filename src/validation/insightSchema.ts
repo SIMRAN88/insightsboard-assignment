@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
 export const insightSchema = z.object({
-  title: z
-    .string()
-    .min(3, 'Title is required'),
+title: z
+  .string()
+  .min(3, 'Title must be at least 3 characters'),
 
-  description: z
-    .string()
-    .min(
-      10,
-      'Description is required'
-    ),
+description: z
+  .string()
+  .min(
+    10,
+    'Description must be at least 10 characters',
+  ),
 
   categoryId:
     z.string().optional(),

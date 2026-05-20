@@ -421,6 +421,58 @@ src/
     └── schemas.ts
 ```
 
+## Tests
+
+The project includes lightweight test coverage for core application behavior using **Jest** and **React Native Testing Library**.
+
+### Run Tests
+
+```bash
+npm test
+```
+
+### Covered Areas
+
+#### 1. Zod Validation Schema
+`src/schemas/insightSchema.test.ts`
+
+Tests form validation rules including:
+
+- valid payload acceptance
+- title / description validation
+- enum validation (`priority`, `stage`)
+- optional field handling
+- default tags behavior
+
+#### 2. Custom Hook
+`src/hooks/useDebounce.test.ts`
+
+Tests reusable debounce logic:
+
+- delayed updates
+- debounced value changes
+- timer behavior
+
+#### 3. Utility Function
+`src/utils/formatStageLabel.test.ts`
+
+Tests helper formatting logic:
+
+- stage capitalization
+- expected label formatting
+
+#### 4. Component Tests
+
+`src/components/KPICard.test.tsx`
+
+- KPI title rendering
+- KPI value rendering
+
+`src/components/AppErrorBoundary.test.tsx`
+
+- error boundary fallback UI
+- crash handling behavior
+
 ---
 
 # Future Improvements

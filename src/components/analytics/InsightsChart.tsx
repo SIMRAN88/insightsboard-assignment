@@ -1,66 +1,38 @@
-import {
-    Dimensions,
-} from 'react-native';
-
 import { LineChart } from 'react-native-chart-kit';
-import React, { useEffect, useState } from 'react';
-const width =
-    Dimensions.get('window').width - 32;
+
+import { CHART_WIDTH, CHART_HEIGHT, chartConfig} from '../../constants/components/analytics/InsightsChart';
+import { InsightsChartProps } from '../../types/components/analytics/InsightsChart';
+import { useDebounce } from '../../hooks/useDebounce';
+
 
 export default function InsightsChart({
-    labels,
-    data,
-}: {
-    labels: string[];
-    data: number[];
-}) {
-    const [animatedData, setAnimatedData] =
-        useState(data.map(() => 0));
+  labels,
+  data,
+}: InsightsChartProps) {
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setAnimatedData(data);
-        }, 200);
-
-        return () => clearTimeout(timeout);
-    }, [data]);
-    return (
-        <LineChart
-            width={width}
-            height={220}
-            bezier
-            withShadow={false}
-            fromZero
-            yAxisInterval={1}
-            data={{
-                labels,
-                datasets: [
-                    {
-                        data: animatedData,
-                    },
-                ]
-            }}
-            chartConfig={{
-                decimalPlaces: 0,
-
-                backgroundGradientFrom: '#ffffff',
-                backgroundGradientTo: '#ffffff',
-
-                color: opacity =>
-                    `rgba(63,81,181,${opacity})`,
-
-                labelColor: opacity =>
-                    `rgba(80,80,80,${opacity})`,
-
-                propsForDots: {
-                    r: '5',
-                    strokeWidth: '2',
-                },
-
-                propsForBackgroundLines: {
-                    strokeDasharray: '6',
-                },
-            }}
-        />
+  const animatedData =
+    useDebounce(
+      data,
+      200
     );
+
+  return (
+    <LineChart
+      width={CHART_WIDTH}
+      height={CHART_HEIGHT}
+      bezier
+      withShadow={false}
+      fromZero
+      yAxisInterval={1}
+      data={{
+        labels,
+        datasets: [
+          {
+            data: animatedData,
+          },
+        ],
+      }}
+      chartConfig={chartConfig}
+    />
+  );
 }

@@ -57,3 +57,4 @@ export function buildWeeklyTrend(
     data: weeks.map(w => w.count),
   };
 }
+
