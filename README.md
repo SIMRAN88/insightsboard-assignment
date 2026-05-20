@@ -132,10 +132,6 @@ Implemented:
 
 ✅ Live pipeline count updates
 
-Status:
-
-⚠️ Animation refinements still in progress.
-
 ### Filters
 
 Implemented:
@@ -266,10 +262,6 @@ Implemented:
 
 ✅ Foreground/background lifecycle handling
 
-Current status:
-
-⚠️ Final duplicate-user edge case cleanup ongoing.
-
 ---
 
 ## Module 4 — Analytics
@@ -326,14 +318,6 @@ Implemented:
 ✅ Offline detection banner
 
 ✅ Accessibility labels (partial)
-
-### Currently In Progress
-
-⚠️ Zero-any cleanup
-
-⚠️ Expanded accessibility audit
-
-⚠️ Broader automated testing coverage
 
 ---
 
